@@ -588,7 +588,11 @@ function getElementByIndexes(arr, indexes) {
  *
  */
 function swapHeadAndTail(arr) {
-
+  const mid = Math.floor(arr.length / 2);
+  const head = arr.slice(0, mid);
+  const tail = arr.slice(-mid);
+  if (arr.length === 1) return [...arr];
+  return arr.length % 2 === 0 ? [...tail, ...head] : [...tail, arr[mid], ...head];
 }
 
 module.exports = {
