@@ -292,17 +292,13 @@ function isCreditCardNumber(ccn) {
   let sum = 0;
   let isSecondNum = false;
 
-  for (let i = nums.length - 1; i > 0; i -= 1) {
-    let double = nums[i] * 2;
+  for (let i = nums.length - 1; i >= 0; i -= 1) {
     if (isSecondNum) {
       nums[i] *= 2;
-      if (double > 9) {
-        double -= 9;
-      }
-      nums[i] = double;
+      nums[i] = nums[i] > 9 ? nums[i] - 9 : nums[i];
     }
     sum += nums[i];
-    isSecondNum = false;
+    isSecondNum = !isSecondNum;
   }
   return sum % 10 === 0;
 }
