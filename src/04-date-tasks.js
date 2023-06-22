@@ -112,7 +112,13 @@ function angleBetweenClockHands(date) {
   const mins = date.getUTCMinutes();
 
   const hAngle = 0.5 * (60 * hours + mins);
-  const mAngle = 
+  const mAngle = 6 * mins;
+
+  let angle = Math.abs(hAngle - mAngle);
+  angle = Math.min(angle, 360 - angle);
+
+  const radAngle = angle * (Math.PI / 180);
+  return radAngle;
 }
 
 
