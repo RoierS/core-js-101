@@ -24,7 +24,7 @@
  *
  */
 function getComposition(f, g) {
-  return function (x) {
+  return function additional(x) {
     return f(g(x));
   };
 }
@@ -120,8 +120,25 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  return function retries() {
+    let res;
+    let error;
+
+    for (let i = 0; i < attempts; i += 1) {
+      try {
+        res = func();
+        error = undefined;
+        break;
+      } catch (err) {
+        error = err;
+      }
+    }
+    if (error) {
+      throw error;
+    }
+    return res;
+  };
 }
 
 
